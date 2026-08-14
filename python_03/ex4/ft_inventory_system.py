@@ -39,3 +39,14 @@ if __name__ == "__main__":
     total_vaules = sum(inv.values())
     for key in inv.keys():
         print(f"Item {key} represents {item_portion(inv[key], total_vaules)}%")
+    max = list(inv.keys())[1]
+    min = list(inv.keys())[1]
+    for key in inv.keys():
+        if inv[key] < inv[min]:
+            min = key
+        elif inv[key] > inv[max]:
+            max = key
+    print(f"Item most abundant: {max} with quantity {inv[max]}")
+    print(f"Item most abundant: {min} with quantity {inv[min]}")
+    inv["magic_item"] = 1
+    print(f"Updated inventory: {inv}")
