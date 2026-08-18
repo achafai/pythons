@@ -16,16 +16,25 @@ def consume_event(events: list) -> typing.Generator:
 
 
 if __name__ == "__main__":
-    players = ["bob", "alice", "dylan", "charlie"]
-    actions = ["run", "eat", "sleep", "grup", "run",
-               "move", "climb", "swim", "released"]
+    players: list = ["bob", "alice", "dylan", "charlie"]
+    actions: list = [
+        "run",
+        "eat",
+        "sleep",
+        "grup",
+        "run",
+        "move",
+        "climb",
+        "swim",
+        "released",
+    ]
     print("=== Game Data Stream Processor ===")
-    for i in range(1000):
+    for _ in range(1000):
         name, action = next(gen_event(players, actions))
-        print(f"Event {i}: Player {name} did action {action}")
+        print(f"Event {_}: Player {name} did action {action}")
     print()
-    events = []
-    for i in range(10):
+    events: list = []
+    for _ in range(10):
         events.append(next(gen_event(players, actions)))
     print(f"Built list of 10 events: {events}")
     print()
