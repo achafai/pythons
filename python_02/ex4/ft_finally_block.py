@@ -23,7 +23,7 @@ def water_plant(plant_name: str) -> None:
         raise PlantError(f"Invalid plant name to water: '{plant_name}'")
 
 
-def test_watering_system(items: list):
+def test_watering_system(items: list) -> None:
     print("Opening watering system")
     try:
         for item in items:
