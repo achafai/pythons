@@ -33,7 +33,6 @@ def test_watering_system(items: list) -> None:
         print(".. ending tests and returning to main")
     finally:
         print("Closing watering system")
-        return
 
 
 if __name__ == "__main__":
