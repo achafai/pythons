@@ -3,7 +3,8 @@ import typing
 
 
 def read_archive_file(filename: str) -> list[str]:
-    file_obj: typing.Optional[typing.IO[str]] = None
+
+    file_obj: typing.IO[str] | None = None
     try:
         file_obj = open(filename, "r")
         return file_obj.readlines()
@@ -13,7 +14,8 @@ def read_archive_file(filename: str) -> list[str]:
 
 
 def save_archive_file(filename: str, lines: list[str]) -> None:
-    out_file: typing.Optional[typing.IO[str]] = None
+
+    out_file: typing.IO[str] | None = None
     try:
         out_file = open(filename, "w")
         for line in lines:
@@ -36,7 +38,8 @@ def test_stream_management(filename: str) -> None:
         print("---")
         print(f"File '{filename}' closed.")
     except Exception as e:
-        print(f"[STDERR] Error opening file '{filename}': {e}", file=sys.stderr)
+        print(f"[STDERR] Error opening file '{filename}': {e}",
+              file=sys.stderr)
         return
 
     print("Transform data:")
@@ -51,7 +54,7 @@ def test_stream_management(filename: str) -> None:
     print("Enter new file name (or empty):", flush=True)
     out_filename = sys.stdin.readline().rstrip("\r\n")
 
-    if not out_filename:
+    if not out_filename or out_filename == filename:
         print("Not saving data.")
         return
 
@@ -60,7 +63,8 @@ def test_stream_management(filename: str) -> None:
         save_archive_file(out_filename, transformed_lines)
         print(f"Data saved in file '{out_filename}'.")
     except Exception as e:
-        print(f"[STDERR] Error opening file '{out_filename}': {e}", file=sys.stderr)
+        print(f"[STDERR] Error opening file '{filename}': {e}",
+              file=sys.stderr)
         print("Data not saved.")
 
 

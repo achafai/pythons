@@ -3,7 +3,8 @@ import typing
 
 
 def read_cyber_archive(filename: str) -> str:
-    file_obj: typing.Optional[typing.IO[str]] = None
+
+    file_obj: typing.IO[str] | None = None
     try:
         file_obj = open(filename, "r")
         return file_obj.read()
@@ -23,7 +24,7 @@ def test_ancient_text(filename: str) -> None:
             print()
         print("---")
         print(f"File '{filename}' closed.")
-    except Exception as e:
+    except (OSError, UnicodeError) as e:
         print(f"Error opening file '{filename}': {e}")
 
 

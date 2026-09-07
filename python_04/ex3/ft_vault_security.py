@@ -1,6 +1,3 @@
-import sys
-import typing
-
 
 def secure_archive(
     filename: str, action: str = "read", content: str = ""

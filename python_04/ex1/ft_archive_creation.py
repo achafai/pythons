@@ -3,7 +3,8 @@ import typing
 
 
 def read_archive_file(filename: str) -> list[str]:
-    file_obj: typing.Optional[typing.IO[str]] = None
+
+    file_obj: typing.IO[str] | None = None
     try:
         file_obj = open(filename, "r")
         return file_obj.readlines()
@@ -13,7 +14,8 @@ def read_archive_file(filename: str) -> list[str]:
 
 
 def save_archive_file(filename: str, lines: list[str]) -> None:
-    out_file: typing.Optional[typing.IO[str]] = None
+
+    out_file: typing.IO[str] | None = None
     try:
         out_file = open(filename, "w")
         for line in lines:
@@ -35,7 +37,7 @@ def test_archive_creation(filename: str) -> None:
             print()
         print("---")
         print(f"File '{filename}' closed.")
-    except Exception as e:
+    except (OSError, UnicodeError) as e:
         print(f"Error opening file '{filename}': {e}")
         return
 
@@ -49,7 +51,7 @@ def test_archive_creation(filename: str) -> None:
     print("---")
 
     out_filename = input("Enter new file name (or empty):\n")
-    if not out_filename:
+    if not out_filename.strip():
         print("Not saving data.")
         return
 
@@ -57,8 +59,8 @@ def test_archive_creation(filename: str) -> None:
     try:
         save_archive_file(out_filename, transformed_lines)
         print(f"Data saved in file '{out_filename}'.")
-    except Exception as e:
-        print(f"Error saving to file '{out_filename}': {e}")
+    except (OSError, UnicodeError) as e:
+        print(f"Error opening file '{filename}': {e}")
 
 
 if __name__ == "__main__":
