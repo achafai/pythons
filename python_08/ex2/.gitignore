@@ -1,0 +1,8 @@
+# Python environment & cache
+__pycache__/
+*.py[cod]
+.venv/
+matrix_env/
+
+# Sensitive configuration - NEVER COMMIT TO GIT
+.env
